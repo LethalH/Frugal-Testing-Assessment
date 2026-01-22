@@ -1,120 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Modern Registration Form</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: "Poppins", sans-serif;
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .container {
-            width: 420px;
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
-        }
-        h2 { text-align: center; margin-bottom: 20px; color: #333; }
-        label { font-weight: 600; display: block; margin-top: 10px; }
-        input, select {
-            width: 100%; padding: 10px; border-radius: 8px;
-            border: 1px solid #ccc; margin-top: 5px;
-        }
-        .btn {
-            width: 100%; padding: 12px; margin-top: 15px;
-            background: #2575fc; color: white; border: none;
-            border-radius: 8px; font-size: 16px; cursor: pointer;
-        }
-        .btn:disabled { background: grey; cursor: not-allowed; }
-        .alert {
-            padding: 12px; margin-top: 10px; border-radius: 8px;
-            font-weight: bold; display: none;
-        }
-        .success { background: #28a745; color: white; }
-        .fail { background: #dc3545; color: white; }
-    </style>
+<meta charset="UTF-8">
+<title>Registration Form</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-<div class="container">
+
+<h1 class="username">HARSH VERMA</h1>
+
+<div class="card">
+
+    <div id="topAlert" class="alert"></div>
+
     <h2>Registration Form</h2>
-    <div id="alertBox" class="alert"></div>
+    <p class="subtitle">Enter the login information for your account.</p>
 
-    <label>First Name *</label><input type="text" id="fname">
-    <label>Last Name *</label><input type="text" id="lname">
-    <label>Email *</label><input type="email" id="email">
-    <label>Phone Number *</label><input type="text" id="phone">
+    <div class="form-grid">
 
-    <label>Gender *</label>
-    <select id="gender">
-        <option value="">Select</option><option>Male</option>
-        <option>Female</option><option>Other</option>
-    </select>
+        <!-- First Name -->
+        <div class="field">
+            <label>First Name *</label>
+            <input type="text" id="fname">
+            <p class="error" id="fnameError"></p>
+        </div>
 
-    <label>Country *</label>
-    <select id="country">
-        <option value="">Select Country</option><option value="India">India</option>
-    </select>
+        <!-- Last Name -->
+        <div class="field">
+            <label>Last Name *</label>
+            <input type="text" id="lname">
+            <p class="error" id="lnameError"></p>
+        </div>
 
-    <label>State *</label><select id="state"></select>
-    <label>City *</label><select id="city"></select>
+        <!-- Email -->
+        <div class="field">
+            <label>Email *</label>
+            <input type="email" id="email">
+            <p class="error" id="emailError"></p>
+        </div>
 
-    <label>Password *</label><input type="password" id="password">
-    <label>Confirm Password *</label><input type="password" id="cpassword">
+        <!-- Phone -->
+        <div class="field">
+            <label>Phone Number *</label>
+            <input type="text" id="phone">
+            <p class="error" id="phoneError"></p>
+        </div>
 
-    <label><input type="checkbox" id="terms"> I agree to Terms & Conditions *</label>
+        <!-- Age -->
+        <div class="field">
+            <label>Age</label>
+            <input type="number" id="age">
+        </div>
 
-    <button class="btn" id="submitBtn" disabled>Submit</button>
+        <!-- Gender -->
+        <div class="field">
+            <label>Gender *</label>
+            <div class="gender-box">
+                <label><input type="checkbox" name="gender" value="Male"> Male</label>
+                <label><input type="checkbox" name="gender" value="Female"> Female</label>
+                <label><input type="checkbox" name="gender" value="Other"> Other</label>
+            </div>
+            <p class="error" id="genderError"></p>
+        </div>
+
+        <!-- Address (Full Width) -->
+        <div class="field-full">
+            <label>Address</label>
+            <textarea id="address"></textarea>
+        </div>
+
+        <!-- Country -->
+        <div class="field">
+            <label>Country *</label>
+            <select id="country">
+                <option value="">Select Country</option>
+                <option value="India">India</option>
+            </select>
+            <p class="error" id="countryError"></p>
+        </div>
+
+        <!-- State -->
+        <div class="field">
+            <label>State *</label>
+            <select id="state"></select>
+            <p class="error" id="stateError"></p>
+        </div>
+
+        <!-- City -->
+        <div class="field">
+            <label>City *</label>
+            <select id="city"></select>
+            <p class="error" id="cityError"></p>
+        </div>
+
+        <!-- Password -->
+        <div class="field">
+            <label>Password *</label>
+            <input type="password" id="password">
+            <p class="strength" id="passStrength"></p>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="field">
+            <label>Confirm Password *</label>
+            <input type="password" id="cpassword">
+            <p class="error" id="passError"></p>
+        </div>
+
+    </div>
+
+    <!-- Terms -->
+    <label style="margin-top:20px;">
+        <input type="checkbox" id="terms"> I agree to Terms & Conditions *
+    </label>
+    <p class="error" id="termsError"></p>
+
+    <button id="submitBtn" disabled class="next-btn">Submit</button>
+
 </div>
-<script>
-    const indiaData = {
-        "Uttar Pradesh": ["Lucknow", "Noida", "Kanpur"],
-        "Delhi": ["New Delhi", "Dwarka", "Saket"],
-        "Maharashtra": ["Mumbai", "Pune", "Nagpur"],
-        "Karnataka": ["Bengaluru", "Mysuru", "Mangalore"]
-    };
-    const country = document.getElementById("country");
-    const state = document.getElementById("state");
-    const city = document.getElementById("city");
-    const submitBtn = document.getElementById("submitBtn");
-    const alertBox = document.getElementById("alertBox");
 
-    country.addEventListener("change", function () {
-        state.innerHTML = ""; city.innerHTML = "";
-        if (country.value === "India") {
-            for (let s in indiaData) state.innerHTML += `<option>${s}</option>`;
-        }
-    });
-    state.addEventListener("change", function () {
-        city.innerHTML = ""; indiaData[state.value].forEach(c => {
-            city.innerHTML += `<option>${c}</option>`;
-        });
-    });
-    document.addEventListener("input", function () {
-        if (
-            fname.value && lname.value && email.value &&
-            phone.value && gender.value && password.value &&
-            cpassword.value && terms.checked
-        ) submitBtn.disabled = false;
-        else submitBtn.disabled = true;
-    });
-    submitBtn.addEventListener("click", function () {
-        if (lname.value === "") {
-            alertBox.style.display = "block"; alertBox.className = "alert fail";
-            alertBox.innerHTML = "Error: Last Name is required!"; return;
-        }
-        if (password.value !== cpassword.value) {
-            alertBox.style.display = "block"; alertBox.className = "alert fail";
-            alertBox.innerHTML = "Error: Passwords do not match!"; return;
-        }
-        alertBox.style.display = "block"; alertBox.className = "alert success";
-        alertBox.innerHTML = "Registration Successful!";
-    });
-</script>
+<script src="script.js"></script>
+
 </body>
 </html>

@@ -1,0 +1,100 @@
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #8f6Bff, #4e7bff);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;    /* Add this */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Your Name at Top */
+.username {
+    color: white;
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+h2, .subtitle {
+    text-align: center;
+    width: 100%;
+}
+
+.card {
+    width: 900px;
+    background: #fff;
+    padding: 40px;
+    border-radius: 18px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.field input,
+.field select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background: #f8f8f8;
+}
+
+.field-full {
+    grid-column: span 2;
+}
+
+input.invalid, select.invalid, textarea.invalid {
+    border-color: red;
+    background: #ffe5e5;
+}
+
+.gender-box {
+    display: flex;
+    gap: 20px;
+    margin-top: 8px;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+}
+
+.strength {
+    font-weight: bold;
+}
+
+.alert {
+    display: none;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.success { background: #28a745; color: #fff; }
+.fail { background: #dc3545; color: #fff; }
+
+.next-btn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 10px;
+    background: #4e7bff;
+    color: #fff;
+    font-size: 18px;
+}
+
+.next-btn:disabled {
+    background: #9db5ff;
+}
