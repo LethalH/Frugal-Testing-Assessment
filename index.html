@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modern Registration Form</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            width: 420px;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
+        }
+        h2 { text-align: center; margin-bottom: 20px; color: #333; }
+        label { font-weight: 600; display: block; margin-top: 10px; }
+        input, select {
+            width: 100%; padding: 10px; border-radius: 8px;
+            border: 1px solid #ccc; margin-top: 5px;
+        }
+        .btn {
+            width: 100%; padding: 12px; margin-top: 15px;
+            background: #2575fc; color: white; border: none;
+            border-radius: 8px; font-size: 16px; cursor: pointer;
+        }
+        .btn:disabled { background: grey; cursor: not-allowed; }
+        .alert {
+            padding: 12px; margin-top: 10px; border-radius: 8px;
+            font-weight: bold; display: none;
+        }
+        .success { background: #28a745; color: white; }
+        .fail { background: #dc3545; color: white; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Registration Form</h2>
+    <div id="alertBox" class="alert"></div>
+
+    <label>First Name *</label><input type="text" id="fname">
+    <label>Last Name *</label><input type="text" id="lname">
+    <label>Email *</label><input type="email" id="email">
+    <label>Phone Number *</label><input type="text" id="phone">
+
+    <label>Gender *</label>
+    <select id="gender">
+        <option value="">Select</option><option>Male</option>
+        <option>Female</option><option>Other</option>
+    </select>
+
+    <label>Country *</label>
+    <select id="country">
+        <option value="">Select Country</option><option value="India">India</option>
+    </select>
+
+    <label>State *</label><select id="state"></select>
+    <label>City *</label><select id="city"></select>
+
+    <label>Password *</label><input type="password" id="password">
+    <label>Confirm Password *</label><input type="password" id="cpassword">
+
+    <label><input type="checkbox" id="terms"> I agree to Terms & Conditions *</label>
+
+    <button class="btn" id="submitBtn" disabled>Submit</button>
+</div>
+<script>
+    const indiaData = {
+        "Uttar Pradesh": ["Lucknow", "Noida", "Kanpur"],
+        "Delhi": ["New Delhi", "Dwarka", "Saket"],
+        "Maharashtra": ["Mumbai", "Pune", "Nagpur"],
+        "Karnataka": ["Bengaluru", "Mysuru", "Mangalore"]
+    };
+    const country = document.getElementById("country");
+    const state = document.getElementById("state");
+    const city = document.getElementById("city");
+    const submitBtn = document.getElementById("submitBtn");
+    const alertBox = document.getElementById("alertBox");
+
+    country.addEventListener("change", function () {
+        state.innerHTML = ""; city.innerHTML = "";
+        if (country.value === "India") {
+            for (let s in indiaData) state.innerHTML += `<option>${s}</option>`;
+        }
+    });
+    state.addEventListener("change", function () {
+        city.innerHTML = ""; indiaData[state.value].forEach(c => {
+            city.innerHTML += `<option>${c}</option>`;
+        });
+    });
+    document.addEventListener("input", function () {
+        if (
+            fname.value && lname.value && email.value &&
+            phone.value && gender.value && password.value &&
+            cpassword.value && terms.checked
+        ) submitBtn.disabled = false;
+        else submitBtn.disabled = true;
+    });
+    submitBtn.addEventListener("click", function () {
+        if (lname.value === "") {
+            alertBox.style.display = "block"; alertBox.className = "alert fail";
+            alertBox.innerHTML = "Error: Last Name is required!"; return;
+        }
+        if (password.value !== cpassword.value) {
+            alertBox.style.display = "block"; alertBox.className = "alert fail";
+            alertBox.innerHTML = "Error: Passwords do not match!"; return;
+        }
+        alertBox.style.display = "block"; alertBox.className = "alert success";
+        alertBox.innerHTML = "Registration Successful!";
+    });
+</script>
+</body>
+</html>
